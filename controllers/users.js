@@ -37,7 +37,7 @@ const createUser = (req, res) => {
 const updateUserById = (req, res) => {
   // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
   let sql = "UPDATE ?? SET ?? = ?, ?? = ? WHERE ?? = ?"
-  let replacements = ['users', 'first_name', 'jerry', 'last_name', 'jones', 'user', 'id', req.params.id];
+  let replacements = ['users', 'first_name', req.body.first_name, 'last_name', req.body.last_name, 'user', 'id', req.params.id];
   // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, replacements)
 
@@ -50,7 +50,7 @@ const updateUserById = (req, res) => {
 const deleteUserByFirstName = (req, res) => {
   // DELETE FROM USERS WHERE FIRST NAME = <REQ PARAMS FIRST_NAME>
   let sql = "DELETE FROM ?? WHERE ?? = ?"
-  let replacements = ['users', 'first_name', 'jerry'];
+  let replacements = ['users', 'first_name', req.body.first_name];
   // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, replacements)
 
