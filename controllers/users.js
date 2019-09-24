@@ -24,7 +24,7 @@ const getUserById = (req, res) => {
 
 const createUser = (req, res) => {
   let sql = "INSERT INTO ?? (??, ??) VALUES (?, ?)"
-  let replacements = ['users', 'first_name', 'last_name', 'bogus', 'user']
+  let replacements = ['users', 'first_name', 'last_name', req.body.first_name, req.body.last_name]
   sql = mysql.format(sql, replacements)
 
   pool.query(sql, (err, results) => {
@@ -35,7 +35,7 @@ const createUser = (req, res) => {
 
 const updateUserById = (req, res) => {
   let sql = "UPDATE ?? SET ?? = ?, ?? = ? WHERE ?? = ?"
-  let replacements = ['users', 'first_name', 'bogus', 'last_name', 'user', 'id', req.params.id]
+  let replacements = ['users', 'first_name', req.body.first_name, 'last_name', req.body.last_name, 'id', req.params.id]
   sql = mysql.format(sql, replacements)
 
   pool.query(sql, (err, results) => {
@@ -46,7 +46,7 @@ const updateUserById = (req, res) => {
 
 const deleteUserByFirstName = (req, res) => {
   let sql = "DELETE FROM ?? WHERE ?? = ?"
-  let replacements = ['users', 'first_name', 'bogus']
+  let replacements = ['users', 'first_name', req.body.first_name]
   sql = mysql.format(sql, replacements)
 
   pool.query(sql, (err, results) => {
