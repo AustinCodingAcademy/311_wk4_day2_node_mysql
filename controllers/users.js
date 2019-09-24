@@ -13,7 +13,7 @@ const getAllUsers = (req, res) => {
 const getUserById = (req, res) => {
   // SELECT USERS WHERE ID = <REQ PARAMS ID>
   let sql = "SELECT * FROM ?? WHERE ?? = ?"
-  let replacements = ['users', 'id', 389]
+  let replacements = ['users', 'id', req.params.id]
   sql = mysql.format(sql, replacements)
 
   pool.query(sql, (err, rows) => {
@@ -35,7 +35,7 @@ const createUser = (req, res) => {
 
 const updateUserById = (req, res) => {
   let sql = "UPDATE ?? SET ?? = ?, ?? = ? WHERE ?? = ?"
-  let replacements = ['users', 'first_name', 'bogus', 'last_name', 'user', 'id', 234]
+  let replacements = ['users', 'first_name', 'bogus', 'last_name', 'user', 'id', req.params.id]
   sql = mysql.format(sql, replacements)
 
   pool.query(sql, (err, results) => {
