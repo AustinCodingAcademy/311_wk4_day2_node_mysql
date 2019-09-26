@@ -14,7 +14,7 @@ const getUserById = (req, res) => {
   // SELECT USERS WHERE ID = <REQ PARAMS ID>
   let sql = "SELECT * FROM ?? WHERE ?? = ?"
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, ['users', 'id', '389'])
+  sql = mysql.format(sql, ['users', 'id', req.params.id])
 
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err)
@@ -26,7 +26,7 @@ const createUser = (req, res) => {
   // INSERT INTO USERS FIRST AND LAST NAME 
   let sql = "INSERT INTO ?? (??,??) VALUES (?,?)"
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, ['users', 'first_name', 'last-name', 'jerry', 'jones'])
+  sql = mysql.format(sql, ['users', 'first_name', 'last_name', req.body.first_name, req.body.last_name])
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
@@ -37,7 +37,7 @@ const createUser = (req, res) => {
 const updateUserById = (req, res) => {
   // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
   let sql = "UPDATE ?? SET ?? = ?, ?? = ? WHERE ?? = ?"
-  let replacements = ['users', 'first_name', req.body.first_name, 'last_name', req.body.last_name, 'user', 'id', req.params.id];
+  let replacements = ['users', 'first_name', req.body.first_name, 'last_name', req.body.last_name, 'id', req.params.id];
   // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, replacements)
 
