@@ -1,13 +1,14 @@
 {
   "name": "311_wk2_day2_express-continued",
   "version": "1.0.0",
-  "description": "",
+  "description": "Initialize and run the app: `npm install` && `npm start`.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js"
+    "start": "nodemon ./index.js",
+    "test": "nodemon ./test.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Rodolfo Galvan",
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
@@ -15,5 +16,13 @@
     "express": "^4.14.0",
     "mysql": "^2.17.1",
     "nodemon": "^1.18.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/galvanitic/311_wk4_day2_node_mysql.git"
+  },
+  "bugs": {
+    "url": "https://github.com/galvanitic/311_wk4_day2_node_mysql/issues"
+  },
+  "homepage": "https://github.com/galvanitic/311_wk4_day2_node_mysql#readme"
 }
