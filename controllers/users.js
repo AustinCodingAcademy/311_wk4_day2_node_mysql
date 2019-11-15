@@ -27,18 +27,15 @@ const getUserById = (req, res) => {
 };
 
 const createUser = (req, res) => {
-  // INSERT INTO USERS FIRST AND LAST NAME
-  let sql = "INSERT INTO ?? (??, ??) VALUES (??, ??)";
-  let sqlInput = [
-    "users",
-    "first_name",
-    "last_name",
-    `${req.body.first_name}`,
-    `${req.body.last_name}`
-  ];
-  sql = mysql.format(sql, sqlInput);
+  // // INSERT INTO USERS FIRST AND LAST NAME
+  // let sql = "INSERT INTO ?? (first_name, last_name) VALUES (??, ??)";
+  // const replacements = ["users", "first_name", "last_name", `${req.body.first_name}`, `${req.body.last_name}`];
+  // sql = mysql.format(sql, replacements);
 
-  pool.query(sql, (err, results) => {
+  //THIS CODE WORKS BUT CANNOT CONVERT TO SQL VARIABLE
+  // "INSERT INTO users (first_name, last_name) VALUES ('" + req.body.first_name + "', '" + req.body.last_name + "');"
+
+  pool.query("INSERT INTO users (first_name, last_name) VALUES ('" + req.body.first_name + "', '" + req.body.last_name + "');", (err, results) => {
     if (err) return handleSQLError(res, err);
     return res.json({ newId: results.insertId });
   });
