@@ -35,7 +35,7 @@ const createUser = (req, res) => {
   //THIS CODE WORKS BUT CANNOT CONVERT TO SQL VARIABLE
   // "INSERT INTO users (first_name, last_name) VALUES ('" + req.body.first_name + "', '" + req.body.last_name + "');"
 
-  pool.query("INSERT INTO users (first_name, last_name) VALUES ('" + req.body.first_name + "', '" + req.body.last_name + "');", (err, results) => {
+  pool.query("INSERT INTO users (first_name, last_name) VALUES ('" + req.body.first_name + "', '" + req.body.last_name + "')", (err, results) => {
     if (err) return handleSQLError(res, err);
     return res.json({ newId: results.insertId });
   });
@@ -47,7 +47,7 @@ const updateUserById = (req, res) => {
   // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, []);
 
-  pool.query(sql, (err, results) => {
+  pool.query("UPDATE users SET first_name = '" + req.body.first_name + "', '" + req.body.last_name + "' WHERE id = '" + req.body.id + '", (err, results) => {
     if (err) return handleSQLError(res, err);
     return res.status(204).json();
   });
