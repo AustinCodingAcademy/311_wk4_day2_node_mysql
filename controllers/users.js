@@ -28,38 +28,52 @@ const getUserById = (req, res) => {
 
 const createUser = (req, res) => {
   // // INSERT INTO USERS FIRST AND LAST NAME
-  // let sql = "INSERT INTO ?? (first_name, last_name) VALUES (??, ??)";
-  // const replacements = ["users", "first_name", "last_name", `${req.body.first_name}`, `${req.body.last_name}`];
-  // sql = mysql.format(sql, replacements);
+  //  let sql = "INSERT INTO ?? (??, ??) VALUES (??, ??)";
+  //  let userInput = ['users', 'first_name', 'last_name', `'${req.body.first_name}'`, `'${req.body.last_name}'`]
+  //   sql = mysql.format(sql, userInput);
 
-  //THIS CODE WORKS BUT CANNOT CONVERT TO SQL VARIABLE
-  // "INSERT INTO users (first_name, last_name) VALUES ('" + req.body.first_name + "', '" + req.body.last_name + "');"
-
-  pool.query("INSERT INTO users (first_name, last_name) VALUES ('" + req.body.first_name + "', '" + req.body.last_name + "')", (err, results) => {
-    if (err) return handleSQLError(res, err);
-    return res.json({ newId: results.insertId });
-  });
+  pool.query(
+    "INSERT INTO users (first_name, last_name) VALUES ('" +
+      req.body.first_name +
+      "', '" +
+      req.body.last_name +
+      "')",
+    (err, results) => {
+      if (err) return handleSQLError(res, err);
+      return res.json({ newId: results.insertId });
+    }
+  );
 };
 
 const updateUserById = (req, res) => {
-  // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
-  let sql = "";
-  // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, []);
+  // // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
+  // let sql = "UPDATE ?? SET ?? = ??, ?? = ?? WHERE ?? = ?";
+  // // WHAT GOES IN THE BRACKETS
+  // let userInput = ['users', 'first_name', `${req.body.first_name}`, 'last_name', `${req.body.last_name}`, 'id', `${req.params.id}`];
+  // sql = mysql.format(sql, []);
 
-  pool.query("UPDATE users SET first_name = '" + req.body.first_name + "', '" + req.body.last_name + "' WHERE id = '" + req.body.id + '", (err, results) => {
-    if (err) return handleSQLError(res, err);
-    return res.status(204).json();
-  });
+  pool.query(
+    " UPDATE users SET first_name = '" +
+      req.body.first_name +
+      "', last_name =  '" +
+      req.body.last_name +
+      "' WHERE id = " +
+      req.params.id +
+      "",
+    (err, results) => {
+      if (err) return handleSQLError(res, err);
+      return res.status(204).json();
+    }
+  );
 };
 
 const deleteUserByFirstName = (req, res) => {
   // DELETE FROM USERS WHERE FIRST NAME = <REQ PARAMS FIRST_NAME>
-  let sql = "";
+  let sql = '';
   // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, []);
 
-  pool.query(sql, (err, results) => {
+  pool.query("DELETE FROM users WHERE first_name = '" + req.params.first_name + "'", (err, results) => {
     if (err) return handleSQLError(res, err);
     return res.json({ message: `Deleted ${results.affectedRows} user(s)` });
   });
