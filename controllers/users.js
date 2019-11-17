@@ -24,7 +24,7 @@ const getUserById = (req, res) => {
 
 const createUser = (req, res) => {
   // INSERT INTO USERS FIRST AND LAST NAME 
-  let sql = "INSERT into users (first_name, last_name) VALUES {'??, ??', 'user'}"
+  let sql = "INSERT into users (first_name, last_name) VALUES {'??, ??'}"
   
   // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, [])
@@ -49,7 +49,7 @@ const updateUserById = (req, res) => {
 
 const deleteUserByFirstName = (req, res) => {
   // DELETE FROM USERS WHERE FIRST NAME = <REQ PARAMS FIRST_NAME>
-  let sql = "DELETE from users id = ?"
+  let sql = "DELETE from users where id = ?"
   // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, [req.prams.id])
 
