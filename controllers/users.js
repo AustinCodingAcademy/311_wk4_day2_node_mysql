@@ -3,7 +3,7 @@ const pool = require('../sql/connection')
 const { handleSQLError } = require('../sql/error')
 
 const getAllUsers = (req, res) => {
-  // SELECT ALL USERS
+  // SELECT ALL USERS * already done
   pool.query("SELECT * FROM users", (err, rows) => {
     if (err) return handleSQLError(res, err)
     return res.json(rows);
@@ -12,10 +12,9 @@ const getAllUsers = (req, res) => {
 
 const getUserById = (req, res) => {
   // SELECT USERS WHERE ID = <REQ PARAMS ID>
-  let sql = "QUERY GOES HERE"
-  // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [])
-
+  let sql = "select * from users where id = ?"
+  // WHAT GOES IN THE BRACKETS *done
+  sql = mysql.format(sql, [req.params.id])
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err)
     return res.json(rows);
