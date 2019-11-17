@@ -20,7 +20,7 @@ let mockRequest = {
 }
 
 //UNCOMMENT WHATEVER YOU ARE TRYING TO TEST
-//userController.getAllUsers(mockRequest,mockResponse);
+userController.getAllUsers(mockRequest,mockResponse);
 //userController.getUserById(mockRequest,mockResponse);
 //userController.createUser(mockRequest,mockResponse);
 //userController.updateUserById(mockRequest,mockResponse);
