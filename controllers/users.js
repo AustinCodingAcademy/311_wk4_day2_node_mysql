@@ -14,24 +14,26 @@ const getUserById = (req, res) => {
   // SELECT USERS WHERE ID = <REQ PARAMS ID>
   //let sql = 'SELECT FROM user WHERE id = ?'
   //let sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?'
-const replacements = ['first_name', 'last_name', 'users', 'id', 1]
-let sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?'
+const replacements = ['first_name', 'last_name', 'id']
+let sql = 'SELECT FROM users ??, ?? WHERE ?? = ?'
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, replacements)
-  //sql = mysql.format(sql, [req.params.id])
+  sql = mysql.format(sql, ['first_name', 'last_name', 'id', req.body.first_name, req.body.last_name, req.body.id])
+  sql = mysql.format(sql, [req.params.id])
 
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err)
-    return res.json(rows[0]);
+    return res.json(rows[3]);
   })
 }
 
 const createUser = (req, res) => {
   // INSERT INTO USERS FIRST AND LAST NAME 
-  let sql = `INSERT INTO users WHERE first_name = ?, last_name = ?`
+  //should be in this order
+  const replacements = ['first_name', 'last_name']
+  let sql = 'INSERT INTO users (??, ??) VALUES (?, ?)'
+  
   // WHAT GOES IN THE BRACKETS
-  sql = 'mysql.format(sql, req.params.${first_name[1], ${last_name[2]})'
-
+  sql = mysql.format(sql, ['first_name', 'last_name', req.body.first_name, req.body.last_name])
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
     return res.json({ newId: results.insertId });
@@ -40,9 +42,9 @@ const createUser = (req, res) => {
 
 const updateUserById = (req, res) => {
   // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
-  let sql = "UPDATE users SET first_name = ?, last_name = ? WHERE id = ?"
+  let sql = "UPDATE users SET ?? = ?, ?? = ?, WHERE ??  = ?"
   // WHAT GOES IN THE BRACKETS
-  sql = `mysql.format(sql, ${first_name[1]}, ${last_name[2]})`
+  sql = mysql.format(sql, ['first_name', req.body.first_name, 'last_name', req.body.last_name, 'id', req.params.id])
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
@@ -52,9 +54,9 @@ const updateUserById = (req, res) => {
 
 const deleteUserByFirstName = (req, res) => {
   // DELETE FROM USERS WHERE FIRST NAME = <REQ PARAMS FIRST_NAME>
-  let sql = ""
+  let sql = "DELETE FROM ?? WHERE ?? = ?"
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [])
+  sql = mysql.format(sql, ['users', req.body.users, 'first_name', req.body.first_name])
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
