@@ -43,7 +43,7 @@ Where 389 is the `:id` parameter in the route. Our job is to select just the row
 
 Look at the following line where it says `mysql.format()`. What do you think goes in those brackets? Hint.. it's the req param id -->
 
-### createUser
+<!-- ### createUser
 
 The route is going to look like this: http://localhost:4001/users/
 
@@ -55,14 +55,14 @@ We are going to send a body with the request that looks like this:
 {
   first_name: 'bogus',
   last_name: 'user'
-}
-```
-
+} -->
+<!-- ``` -->
+<!-- 
 Or any fake user of your choice. The goal is to take the request body and insert it into the database. You will write a query to INSERT INTO users (fields) VALUES ()
 
-Again we will need to figure out what goes in the brackets
+Again we will need to figure out what goes in the brackets -->
 
-### updateUserById
+<!-- ### updateUserById
 
 The route is going to look like this: http://localhost:4001/users/234
 
@@ -75,9 +75,9 @@ The goal of this route is to again send a body and this time change the first_na
   first_name: 'bogus',
   last_name: 'user'
 }
-```
+``` -->
 
-Write a SQL statement to UPDATE users SET fields = values WHERE id = req param id
+<!-- Write a SQL statement to UPDATE users SET fields = values WHERE id = req param id -->
 
 ### deleteUserByFirstName
 
