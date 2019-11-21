@@ -25,7 +25,7 @@ The routes/controllers and basic setup has been done for us. Our job is now to c
 
 Keep in mind that your port (4001) may be different.
 
-Take another look in the `sql/connections.js` file and notice how we set up the class to pass the same connection pool to any file that requests it. 
+Take another look in the `sql/connections.js` file and notice how we set up the class to pass the same connection pool to any file that requests it.   
 
 Additionally, navigate to the `initialize.sql` file and look at the CREATEs for the three tables. Do we notice anything different this time around? How about the `ON DELETE CASCADE` line? Remember last time when we couldn't delete a row from the users table because the usersContact and usersAddress were still dependent on it? That no longer applies with CASCADE. Now when we delete something from the users table it will automatically be deleted from the other two tables based on the foreign key relationship. 
 
