@@ -27,10 +27,10 @@ const getUserById = (req, res) => {
 };
 
 const createUser = (req, res) => {
-  // // INSERT INTO USERS FIRST AND LAST NAME
-  //  let sql = "INSERT INTO ?? (??, ??) VALUES (??, ??)";
-  //  let userInput = ['users', 'first_name', 'last_name', `'${req.body.first_name}'`, `'${req.body.last_name}'`]
-  //   sql = mysql.format(sql, userInput);
+  // INSERT INTO USERS FIRST AND LAST NAME
+   let sql = "INSERT INTO ?? (??, ??) VALUES (??, ??)";
+   let userInput = ['users', 'first_name', 'last_name', `'${req.body.first_name}'`, `'${req.body.last_name}'`]
+    sql = mysql.format(sql, userInput);
 
   pool.query(
     "INSERT INTO users (first_name, last_name) VALUES ('" +
