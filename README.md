@@ -11,7 +11,7 @@ Navigate to the `sql/connections.js` file and alter the following fields to refl
 ```
   host: 'localhost',
   user: 'root',
-  password: 'password',
+  password: 'coding',
   database: 'admin'
 ```
 
