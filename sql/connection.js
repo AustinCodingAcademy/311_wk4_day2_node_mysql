@@ -9,7 +9,7 @@ class Connection {
         host: '35.226.112.169',
         user: 'root',
         password: 'password1',
-        database: 'first-instance'
+        database: 'PLEASE_READ_ME_VVV'
       })
 
       return this.pool

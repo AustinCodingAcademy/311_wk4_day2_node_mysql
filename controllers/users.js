@@ -21,11 +21,22 @@ const getUserById = (req, res) => {
   })
 }
 
+// const getUserByIdReq = (req, res) => {
+  
+//   let sql = "select * from users where id = ?"
+ 
+//   sql = mysql.format(sql, [req.params.id])
+//   pool.query(sql, (err, rows) => {
+//     if (err) return handleSQLError(res, err)
+//     return res.json(rows);
+//   })
+// }
+
 const createUser = (req, res) => {
   // INSERT INTO USERS FIRST AND LAST NAME 
-  let sql = "QUERY GOES HERE"
+  let sql = ""
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [])
+  sql = mysql.format(sql, [req.params.id])
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
