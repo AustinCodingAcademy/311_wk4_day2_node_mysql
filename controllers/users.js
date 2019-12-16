@@ -10,10 +10,10 @@ const getAllUsers = (req, res) => {
   })
 }
 
+
+
 const getUserById = (req, res) => {
-  // SELECT USERS WHERE ID = <REQ PARAMS ID>
   let sql = "QUERY GOES HERE"
-  // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, [])
 
   pool.query(sql, (err, rows) => {
@@ -21,6 +21,8 @@ const getUserById = (req, res) => {
     return res.json(rows);
   })
 }
+
+
 
 const createUser = (req, res) => {
   // INSERT INTO USERS FIRST AND LAST NAME 
