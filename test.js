@@ -24,4 +24,4 @@ let mockRequest = {
 // userController.getUserById(mockRequest,mockResponse);
 // userController.createUser(mockRequest,mockResponse);
 // userController.updateUserById(mockRequest,mockResponse);
-
+userController.deleteUserByFirstName(mockRequest,mockResponse);
