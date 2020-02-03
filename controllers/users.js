@@ -12,7 +12,7 @@ const getAllUsers = (req, res) => {
 
 const getUserById = (req, res) => {
   // SELECT USERS WHERE ID = <REQ PARAMS ID>
-  let sql = "QUERY GOES HERE"
+  let sql = `SELECT * FROM users WHERE id = ${req.params.id}`
   // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, [])
 
@@ -24,7 +24,9 @@ const getUserById = (req, res) => {
 
 const createUser = (req, res) => {
   // INSERT INTO USERS FIRST AND LAST NAME 
-  let sql = "QUERY GOES HERE"
+  let sql = `INSERT INTO users (id, first_name, last_name) VALUES ( 'id' = 'MAX(id) + 1', '${req.body.first_name}' , '${req.body.last_name}' )`
+  // This below option works if you want to create a User with a specific id from the body.
+  // let sql = `INSERT INTO users (id, first_name, last_name) VALUES ( '${req.body.id}', '${req.body.first_name}' , '${req.body.last_name}' )`
   // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, [])
 
@@ -36,9 +38,10 @@ const createUser = (req, res) => {
 
 const updateUserById = (req, res) => {
   // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
-  let sql = ""
+  let sql = "UPDATE users SET first_name = ?, last_name = ? WHERE id = ?"
+  // let sql = `UPDATE users SET (first_name, last_name) VALUES ( '${req.body.first_name}' , '${req.body.last_name}' ) WHERE id = ${req.param.id}`
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [])
+  sql = mysql.format(sql, [req.body.first_name, req.body.last_name, req.params.id])
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
@@ -48,9 +51,9 @@ const updateUserById = (req, res) => {
 
 const deleteUserByFirstName = (req, res) => {
   // DELETE FROM USERS WHERE FIRST NAME = <REQ PARAMS FIRST_NAME>
-  let sql = ""
+  let sql = "DELETE FROM users WHERE first_name = ?"
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [])
+  sql = mysql.format(sql, [req.body.first_name])
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)

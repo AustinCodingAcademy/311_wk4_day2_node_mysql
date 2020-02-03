@@ -1,6 +1,6 @@
 # MySQL + Express
 
-## Setup
+## Setup // DONE
 
 Initialize and run the app: `npm install` && `npm start`.
 
@@ -35,7 +35,7 @@ Additionally, navigate to the `initialize.sql` file and look at the CREATEs for 
 
 This function is done for us. Notice the SQL statement retrieving all the rows from the users table.
 
-### getUserById
+### getUserById //DONE
 
 The route is going to look like this: http://localhost:4001/users/389
 
@@ -43,7 +43,7 @@ Where 389 is the `:id` parameter in the route. Our job is to select just the row
 
 Look at the following line where it says `mysql.format()`. What do you think goes in those brackets? Hint.. it's the req param id
 
-### createUser
+### createUser // DONE
 
 The route is going to look like this: http://localhost:4001/users/
 
@@ -62,7 +62,7 @@ Or any fake user of your choice. The goal is to take the request body and insert
 
 Again we will need to figure out what goes in the brackets
 
-### updateUserById
+### updateUserById // DONE
 
 The route is going to look like this: http://localhost:4001/users/234
 
