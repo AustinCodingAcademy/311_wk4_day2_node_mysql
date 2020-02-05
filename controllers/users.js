@@ -35,8 +35,8 @@ const createUser = (req, res) => {
   const replacements = [
     'first_name',
     'last_name',
-    'bob',
-    'jenkins'
+    req.body.first_name,
+    req.body.last_name
   ]
   sql = mysql.format(sql, replacements)
 
@@ -53,15 +53,15 @@ const updateUserById = (req, res) => {
   const replacements = [
     'users',
     'first_name',
-    'john',
+    req.body.first_name,
     'last_name',
-    'jackson',
+    req.body.last_name,
     'users.id',
     req.params.id
   ]
   sql = mysql.format(sql, replacements)
 
-  pool.query(sql, (err, results) => {
+  pool.query(sql, (err, res) => {
     if (err) return handleSQLError(res, err)
     return res.status(204).json();
   })
