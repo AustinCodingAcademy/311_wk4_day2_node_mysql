@@ -1,4 +1,7 @@
 const mysql = require('mysql')
+require('dotenv').config()
+
+// console.log(process)
 
 class Connection {
   constructor() {
@@ -6,9 +9,9 @@ class Connection {
       console.log('creating connection...')
       this.pool = mysql.createPool({
         connectionLimit: 100,
-        host: 'localhost',
-        user: 'root',
-        password: 'password',
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
         database: 'admin'
       })
 
