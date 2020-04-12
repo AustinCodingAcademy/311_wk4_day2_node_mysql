@@ -9,10 +9,10 @@ The app is using `nodemon`. Any changes made (and saved) will cause the server t
 Navigate to the `sql/connections.js` file and alter the following fields to reflect your database setup:
 
 ```
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'admin'
+  host: 'den1.mysql2.gear.host',
+  user: 'aca311week3day2',
+  password: 'Jo1Gn98Bu~?f',
+  database: 'aca311week3day2'
 ```
 
 These will be the same credentials we used to set up a connection in MySQL Workbench.
@@ -90,3 +90,5 @@ Write a SQL statement to DELETE FROM users WHERE first_name = req param first_na
 ## Summary
 
 If all went according to plan we now have a full CRUD API that selects, inserts, updates and deletes from a SQL database. Great job! Take the time to start expanding on these concepts. 
+
+Update 4/12: worked great!
