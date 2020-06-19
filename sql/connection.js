@@ -8,7 +8,7 @@ class Connection {
         connectionLimit: 100,
         host: '34.72.115.136',
         user: 'root',
-        password: 'Digital#2020',
+        password: '*******',
         database: 'admin'
       })
 
