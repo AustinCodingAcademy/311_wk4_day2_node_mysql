@@ -4,7 +4,7 @@ const { handleSQLError } = require('../sql/error')
 
 const getAllUsers = (req, res) => {
   // SELECT ALL USERS
-  pool.query("SELECT * FROM users", (err, rows) => {
+  pool.query("SELECT * FROM users JOIN usersAddress on users.id=usersAddress.user_id JOIN usersContact on users.id=usersContact.user_id", (err, rows) => {
     if (err) return handleSQLError(res, err)
     return res.json(rows);
   })
@@ -24,15 +24,29 @@ const getUserById = (req, res) => {
 
 const createUser = (req, res) => {
   let newUser = req.body
+  let newID = 0
   // INSERT INTO USERS FIRST AND LAST NAME 
-  let sql = "INSERT INTO users (first_name, last_name) VALUES(?, ?)"
+  let sql = "INSERT INTO users (first_name, last_name) VALUES (?, ?)"
   // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, [newUser.first_name, newUser.last_name])
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
-    return res.json({ newId: results.insertId });
+    newID = results.insertId
+    // return res.json({ newId: results.insertId });
   })
+
+   // INSERT INTO USERS FIRST AND LAST NAME 
+   sql = "INSERT INTO usersAddress (user_id, address, city, county, state, zip) VALUES (?, ?, ?, ?, ?, ?)"
+   // WHAT GOES IN THE BRACKETS
+   sql = mysql.format(sql, [newID, newUser.address, newUser.city, newUser.county, newUser.state, newUser.zip])
+ 
+   pool.query(sql, (err, results) => {
+     if (err) return handleSQLError(res, err)
+     newID = results.insertId
+     return res.json({ newId: results.insertId });
+   })
+
 }
 
 const updateUserById = (req, res) => {
