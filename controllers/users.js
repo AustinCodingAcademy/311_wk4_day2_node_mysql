@@ -3,7 +3,7 @@ const pool = require('../sql/connection')
 const { handleSQLError } = require('../sql/error')
 
 const getAllUsers = (req, res) => {
-  // SELECT ALL USERS
+  //SELECT ALL USERS
   pool.query("SELECT * FROM users JOIN usersAddress on users.id=usersAddress.user_id JOIN usersContact on users.id=usersContact.user_id", (err, rows) => {
     if (err) return handleSQLError(res, err)
     return res.json(rows);
@@ -24,16 +24,20 @@ const getUserById = (req, res) => {
 
 const createUser = (req, res) => {
   let newUser = req.body
-  let newID = 0
   // INSERT INTO USERS FIRST AND LAST NAME 
-  let sql = "INSERT INTO users (first_name, last_name) VALUES (?, ?)"
+  let sql = "insert into users (first_name, last_name) values (?, ?);"
+  sql += "set @id = last_insert_id();"
+  sql += "insert into usersAddress (user_id, address, city, county, state, zip) values (@id, ?, ?, ?, ?, ?);"
+  sql += "insert into usersContact (user_id, phone1, phone2, email) values (@id, ?, ?, ?)"
+
+
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [newUser.first_name, newUser.last_name])
+  let replacements = [newUser.first_name, newUser.last_name, newUser.address, newUser.city, newUser.county, newUser.state, newUser.zip, newUser.phone1, newUser.phone2, newUser.email]
+  sql = mysql.format(sql, replacements)
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
-    newID = results.insertId
-    return res.json({ newId: results.insertId });
+    return res.json(results);
   })
 }
 

@@ -9,7 +9,8 @@ class Connection {
         host: '35.231.162.78',
         user: 'aca',
         password: 'Mc@121606',
-        database: 'admin'
+        database: 'admin',
+        multipleStatements: true
       })
 
       return this.pool
