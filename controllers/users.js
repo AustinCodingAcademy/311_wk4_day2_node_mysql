@@ -33,20 +33,8 @@ const createUser = (req, res) => {
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
     newID = results.insertId
-    // return res.json({ newId: results.insertId });
+    return res.json({ newId: results.insertId });
   })
-
-   // INSERT INTO USERS FIRST AND LAST NAME 
-   sql = "INSERT INTO usersAddress (user_id, address, city, county, state, zip) VALUES (?, ?, ?, ?, ?, ?)"
-   // WHAT GOES IN THE BRACKETS
-   sql = mysql.format(sql, [newID, newUser.address, newUser.city, newUser.county, newUser.state, newUser.zip])
- 
-   pool.query(sql, (err, results) => {
-     if (err) return handleSQLError(res, err)
-     newID = results.insertId
-     return res.json({ newId: results.insertId });
-   })
-
 }
 
 const updateUserById = (req, res) => {
