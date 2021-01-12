@@ -24,13 +24,13 @@ const createUser = (req, res) => {
   let newUser = req.body
   let replacements = [newUser.first_name, newUser.last_name, newUser.address, newUser.city, newUser.county, newUser.state, newUser.zip, newUser.phone1, newUser.phone2, newUser.email]
   let sql = 'INSERT INTO users (first_name, last_name) VALUES (?, ?);'
-  let firstName = req.body.first_name
-  let userId = `SELECT id FROM users WHERE first_name=${firstName}`
+  let firstName = newUser.first_name
+  let userId = `SELECT id FROM users WHERE first_name='${firstName}'`
   //CANNOT GET THIS TO WORK. MYSQL does not enjoy backticks
-  sql += `INSERT INTO usersAddress (user_id, address, city, county, state, zip) VALUES ((${userId}), ??, ??, ??, ??, ??);`
-  sql  += `INSERT INTO userscontact(user_id, phone1, phone2, email) VALUES ((${userId}, ??, ??, ??)`
-  sql = mysql.format(sql,[])
-  pool.query(sql, replacements, (err, results) => {
+  sql += `INSERT INTO usersAddress (user_id, address, city, county, state, zip) VALUES ((${userId}), ?, ?, ?, ?, ?);`
+  sql  += `INSERT INTO userscontact(user_id, phone1, phone2, email) VALUES ((${userId}), ?, ?, ?)`
+  sql = mysql.format(sql, replacements)
+  pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
     return res.json({ newId: results.insertId });
   })

@@ -9,7 +9,8 @@ class Connection {
         host: 'den1.mysql3.gear.host',
         user: 'cbmysql1',
         password: 'Ei5dCp55~9X?',
-        database: 'cbmysql1'
+        database: 'cbmysql1',
+        multipleStatements: true
       })
 
       return this.pool
