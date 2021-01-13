@@ -29,8 +29,8 @@ const createUser = (req, res) => {
   let replacements = [newUser.first_name, newUser.last_name, newUser.address, newUser.city, newUser.county, newUser.state, newUser.zip, newUser.phone1, newUser.phone2, newUser.email]
   sql = mysql.format(sql, replacements)
   pool.query(sql, (err, results) => {
-    if(err) return handleSQLError(res, err)
-    return res.json(results)
+    if (err) return handleSQLError(res, err)
+    return res.json({ newId: results.insertId });
   })
 }
 
