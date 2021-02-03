@@ -6,7 +6,7 @@ Initialize and run the app: `npm install` && `npm start`.
 
 The app is using `nodemon`. Any changes made (and saved) will cause the server to restart.
 
-Navigate to the `sql/connections.js` file and alter the following fields to reflect your database setup:
+Navigate to the `sql/connection.js` file and alter the following fields to reflect your database setup:
 
 ```
   host: 'localhost',
@@ -25,7 +25,7 @@ The routes/controllers and basic setup has been done for us. Our job is now to c
 
 Keep in mind that your port (4001) may be different.
 
-Take another look in the `sql/connections.js` file and notice how we set up the class to pass the same connection pool to any file that requests it. 
+Take another look in the `sql/connection.js` file and notice how we set up the class to pass the same connection pool to any file that requests it. 
 
 Additionally, navigate to the `initialize.sql` file and look at the CREATEs for the three tables. Do we notice anything different this time around? How about the `ON DELETE CASCADE` line? Remember last time when we couldn't delete a row from the users table because the usersContact and usersAddress were still dependent on it? That no longer applies with CASCADE. Now when we delete something from the users table it will automatically be deleted from the other two tables based on the foreign key relationship. 
 
@@ -39,9 +39,9 @@ This function is done for us. Notice the SQL statement retrieving all the rows f
 
 The route is going to look like this: http://localhost:4001/users/389
 
-Where 389 is the `:id` parameter in the route. Our job is to select just the row that matches that id and return it. Write a SELECT statement WHERE id = the req param id
+Where 389 is the `:id` parameter in the route. Our job is to select just the row that matches that id and return it. Write a SELECT statement WHERE id = the req params id
 
-Look at the following line where it says `mysql.format()`. What do you think goes in those brackets? Hint.. it's the req param id
+Look at the following line where it says `mysql.format()`. What do you think goes in those brackets? Hint.. it's the req params id
 
 ### createUser
 
@@ -77,7 +77,7 @@ The goal of this route is to again send a body and this time change the first_na
 }
 ```
 
-Write a SQL statement to UPDATE users SET fields = values WHERE id = req param id
+Write a SQL statement to UPDATE users SET fields = values WHERE id = req params id
 
 ### deleteUserByFirstName
 
@@ -85,7 +85,7 @@ This route will look like this: http://localhost:4001/users/bogus
 
 But it will be using the DELETE protocol so again we will need to use Postman to achieve this.
 
-Write a SQL statement to DELETE FROM users WHERE first_name = req param first_name
+Write a SQL statement to DELETE FROM users WHERE first_name = req params first_name
 
 ### Create a full Query
 
