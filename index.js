@@ -5,6 +5,7 @@ const usersRouter = require('./routers/users');
 const app = express();
 const port = process.env.PORT || 4001;
 
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use('/users', usersRouter)
 
