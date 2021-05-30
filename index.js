@@ -1,17 +1,17 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const usersRouter = require('./routers/users');
-
+const usersRouter = require('./routers/routerUsers');
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 const port = process.env.PORT || 4001;
 
-app.use(bodyParser.json())
 app.use('/users', usersRouter)
 
 app.get('/', (req, res) => {
-  res.send('Welcome to our server!')
+    res.send('Welcome to our server!')
 })
 
 app.listen(port, () => {
- console.log(`Web server is listening on port ${port}!`);
+    console.log(`Listening on port ${port}!`);
 });
