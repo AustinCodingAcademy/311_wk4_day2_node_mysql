@@ -31,11 +31,11 @@ Additionally, navigate to the `initialize.sql` file and look at the CREATEs for 
 
 ## Controller functions
 
-### getAllUsers
+### getAllUsers * DONE
 
 This function is done for us. Notice the SQL statement retrieving all the rows from the users table.
 
-### getUserById
+### getUserById * DONE
 
 The route is going to look like this: http://localhost:4001/users/389
 
