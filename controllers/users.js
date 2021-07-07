@@ -12,9 +12,11 @@ const getAllUsers = (req, res) => {
 
 const getUserById = (req, res) => {
   // SELECT USERS WHERE ID = <REQ PARAMS ID>
-  let sql = "QUERY GOES HERE"
+  let sql = 'SELECT ??, ??, ?? FROM ?? WHERE ?? = ?'
+  const replacements = ['id', 'first_name', 'last_name', 'users', 'id', req.params.id]
+  // let sql = `SELECT * FROM users WHERE id = ${req.params.id}`
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [])
+  sql = mysql.format(sql, replacements)
 
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err)
@@ -23,10 +25,11 @@ const getUserById = (req, res) => {
 }
 
 const createUser = (req, res) => {
-  // INSERT INTO USERS FIRST AND LAST NAME 
-  let sql = "QUERY GOES HERE"
+  let sql = 'INSERT INTO users (first_name, last_name) VALUES (?, ?)'
+  let replacements = [req.body.first_name, req.body.last_name]
+  
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [])
+  sql = mysql.format(sql, replacements)
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
@@ -36,21 +39,28 @@ const createUser = (req, res) => {
 
 const updateUserById = (req, res) => {
   // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
-  let sql = ""
+// UPDATE Customers
+// SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+// WHERE CustomerID = 1;
+
+  let sql = 'UPDATE users SET first_name = ?, last_name = ? WHERE ?? = ?'
+  let replacements = [req.body.first_name, req.body.last_name, 'id', req.params.id]
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [])
+  sql = mysql.format(sql, replacements)
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
-    return res.status(204).json();
+    return res.status(200).json("success");
   })
 }
 
 const deleteUserByFirstName = (req, res) => {
   // DELETE FROM USERS WHERE FIRST NAME = <REQ PARAMS FIRST_NAME>
-  let sql = ""
+  let sql = 'DELETE FROM users WHERE ?? = ?'
+  let replacements = ['first_name', req.params.first_name]
+
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [])
+  sql = mysql.format(sql, replacements)
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
