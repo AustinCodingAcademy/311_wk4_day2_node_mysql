@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 app.use('/users', usersRouter)
 
 app.get('/', (req, res) => {
-  res.send('Welcome to our server!')
+  res.send('Welcome to our server! Week4 Day2 Assignment')
 })
 
 app.listen(port, () => {
